@@ -117,6 +117,12 @@ Installation
 
     pip install -U python-dotenv
 
+For commandline support, use the `cli` option during installation:
+
+::
+
+    pip install -U "python-dotenv[cli]"
+
 Command-line interface
 ======================
 
