@@ -25,7 +25,7 @@ def jinja_templating(variable):
     return variable
 
 
-def load_dotenv(dotenv_path, verbose=False, override=False):
+def load_dotenv(dotenv_path, verbose=False, override=False, jinja_template=False):
     """
     Read a .env file and load into os.environ.
     """
@@ -34,7 +34,8 @@ def load_dotenv(dotenv_path, verbose=False, override=False):
             warnings.warn("Not loading %s - it doesn't exist." % dotenv_path)
         return None
     for k, v in dotenv_values(dotenv_path).items():
-        v = jinja_templating(v)
+        if jinja_template:
+            v = jinja_templating(v)
         if override:
             os.environ[k] = v
         else:

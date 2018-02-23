@@ -95,7 +95,7 @@ def test_load_dotenv_variable_jinja_formatting(cli):
         set_key(dotenv_path, 'a', 'foo')
         set_key(dotenv_path, 'b', '{{a}}/bar')
         set_key(dotenv_path, 'c', '{bar}')
-        success = load_dotenv(dotenv_path)
+        success = load_dotenv(dotenv_path, jinja_template=True)
         assert success
         assert os.environ['a'] == 'foo'
         assert os.environ['b'] == 'foo/bar'
@@ -109,7 +109,7 @@ def test_load_dotenv_variable_filtering(cli):
         sh.touch(dotenv_path)
         set_key(dotenv_path, 'd', 'foo')
         set_key(dotenv_path, 'e', '{{a|upper}}')
-        success = load_dotenv(dotenv_path)
+        success = load_dotenv(dotenv_path, jinja_template=True)
         assert success
         assert os.environ['d'] == 'foo'
         assert os.environ['e'] == os.environ['a'].upper()
